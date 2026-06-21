@@ -1,4 +1,4 @@
-#main app type shit
+#main app
 import hmac
 import json
 import os
