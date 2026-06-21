@@ -1,8 +1,4 @@
-/* ===========================================================
-   app.jsx — OMORI Finance Tracker dashboard
-   single font · black-OR-white theme · calendar · debt tracker
-   draggable + resizable widget board (desktop) / stacked (mobile)
-   =========================================================== */
+/* main app*/
 const { useState: uS, useEffect: uE, useMemo: uM, useRef: uR } = React;
 const A = window.Finance;
 
