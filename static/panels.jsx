@@ -1,10 +1,4 @@
-/* ===========================================================
-   panels.jsx — action buttons, ledger, add-entry modal, calendar, debts
-   Exports (window): ActionButton, FilterBar, Ledger, AddEntryModal,
-                     DebtTracker, ChipToggle, Calendar
-   All colors are theme tokens (var(--ink)/--paper/...). Pastel fills always
-   carry dark glyphs via var(--on-pastel).
-   =========================================================== */
+/* all the different graphs and components, planning on adding more stuff and link from my other websites like stock trader*/
 const PF = window.Finance;
 const { useState: useStateP } = React;
 

@@ -1,10 +1,4 @@
-/* ===========================================================
-   stickers.jsx — freely draggable images / GIFs pinned to the page
-   The IMAGE button opens AddImageModal (preview + wobbly-border
-   toggle); placed images anchor to a document point (scroll with
-   the page), and can be dragged & resized anywhere. GIFs animate.
-   Exports (window): StickerLayer, AddImageModal
-   =========================================================== */
+/* atp i might just make this a scrapbook website with my memories since its really nice actually*/
 const { useState: useStateSt, useRef: useRefSt, useEffect: useEffectSt } = React;
 
 function Sticker({ st, onChange, onDelete, editMode }) {
