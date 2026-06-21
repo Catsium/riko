@@ -1,0 +1,15 @@
+# server-side data store (your real finances) — never commit
+finance_data.json
+.finance-*.tmp
+
+# local secrets
+config.py
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+README.md
+.claude/settings.local.json
+.claude/launch.json

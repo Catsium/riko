@@ -1,0 +1,245 @@
+/* ===========================================================
+   OMORI FINANCE TRACKER — core stylesheet
+   black & white scrapbook · soft-OMORI pastels · wobbly lines
+   =========================================================== */
+
+/* ---- the one uploaded font, used for EVERYTHING ---- */
+@font-face {
+  font-family: 'OMORI Pixel';
+  src: url('fonts/OMORI_GAME2.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  /* ink + paper */
+  --ink: #161616;
+  --ink-soft: #2a2a2a;
+  --paper: #fbfbf8;
+  --paper-2: #f3f2ec;
+  --white: #ffffff;
+
+  /* soft-OMORI category pastels */
+  --c-food: #f8c8d8;   /* pink   */
+  --c-transport: #bcd9f0; /* baby blue */
+  --c-entertainment: #d9c9ef; /* lavender */
+  --c-essentials: #bfe3c8; /* mint */
+  --c-maimai: #f7ecc0; /* pale yellow */
+  --c-others: #f6d2bf; /* peach */
+
+  /* semantic */
+  --in: #bfe3c8;    /* income mint  */
+  --out: #f6bfc4;   /* expense coral */
+  --in-ink: #2f6b45;
+  --out-ink: #b04a52;
+
+  /* theme-aware helpers */
+  --on-pastel: #1b1b1b;        /* text/glyphs ON a pastel fill — always dark */
+  --hair: rgba(0,0,0,0.16);    /* faint dividers */
+  --pos: #2f6b45;              /* income amount */
+  --neg: #b04a52;              /* expense amount */
+  --neu: #8a8a82;              /* no cash moved (grey) — e.g. friend-covered expense */
+
+  /* one font slot — the uploaded font everywhere (monospace only as a
+     technical last-resort if the file ever fails to load) */
+  --font-pixel: 'OMORI Pixel', monospace;
+  --font-hand: 'OMORI Pixel', monospace;
+
+  /* paper grain dots — theme aware */
+  --grain: rgba(0,0,0,0.025);
+  --grain2: rgba(0,0,0,0.018);
+
+  --wobble-dur: 0.5s; /* set by tweak */
+}
+
+/* DARK THEME — background is only black, ink is light. (Light is :root.) */
+.theme-dark {
+  --ink: #f3f3ec;
+  --paper: #0c0c0c;
+  --paper-2: #1a1a1a;
+  --grain: rgba(255,255,255,0.045);
+  --grain2: rgba(255,255,255,0.030);
+  --hair: rgba(255,255,255,0.16);
+  --pos: #93e3b0;
+  --neg: #f4a3ab;
+  --neu: #9a9a90;
+  /* --on-pastel intentionally NOT overridden: pastels are always light */
+}
+
+/* SEPIA — warm paper, brown ink */
+.theme-sepia {
+  --ink: #3c2e1e;
+  --ink-soft: #4d3c28;
+  --paper: #f4ead6;
+  --paper-2: #ece0c4;
+  --grain: rgba(60,46,30,0.05);
+  --grain2: rgba(60,46,30,0.035);
+  --hair: rgba(60,46,30,0.18);
+  --pos: #5a7a3e;
+  --neg: #b15a3e;
+  --neu: #8c8270;
+}
+
+/* MINT — cool soft greens */
+.theme-mint {
+  --ink: #1f3a30;
+  --ink-soft: #2e4a3e;
+  --paper: #eef7f1;
+  --paper-2: #ddeee3;
+  --grain: rgba(31,58,48,0.045);
+  --grain2: rgba(31,58,48,0.03);
+  --hair: rgba(31,58,48,0.16);
+  --pos: #2f7a52;
+  --neg: #c05a52;
+  --neu: #7d8a80;
+}
+
+/* INK BLUE — deep navy paper */
+.theme-ink {
+  --ink: #e9eef6;
+  --paper: #131a2b;
+  --paper-2: #1f293f;
+  --grain: rgba(255,255,255,0.04);
+  --grain2: rgba(255,255,255,0.028);
+  --hair: rgba(255,255,255,0.16);
+  --pos: #93e3b0;
+  --neg: #f4a3ab;
+  --neu: #9aa0a8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-pixel);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* paper grain on the scrapbook spread */
+.paper-bg {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(var(--grain) 1px, transparent 1px),
+    radial-gradient(var(--grain2) 1px, transparent 1px);
+  background-size: 7px 7px, 13px 13px;
+  background-position: 0 0, 3px 4px;
+}
+
+/* ---- wobble: boiling hand-drawn lines -------------------------------
+   We apply an animated SVG turbulence filter to FRAME svgs only, so the
+   border lines jitter while text stays crisp. Strength is driven by the
+   filter's displacement scale (set per-tweak in app). The "boil" is a
+   steps() animation that swaps between three seed variants.            */
+.wobble-anim {
+  animation: wobbleBoil var(--wobble-dur) steps(1) infinite;
+}
+@keyframes wobbleBoil {
+  0%   { filter: url(#wob-0); }
+  33%  { filter: url(#wob-1); }
+  66%  { filter: url(#wob-2); }
+}
+
+/* wobble strength 0 → freeze everything (frames AND the font itself) */
+.no-wobble .wobble-anim,
+.no-wobble .wobble-text,
+.no-wobble .pixel,
+.no-wobble .hand { animation: none !important; filter: none !important; }
+
+/* text that should jitter very subtly (titles) */
+.wobble-text {
+  animation: wobbleBoilText var(--wobble-dur) steps(1) infinite;
+}
+@keyframes wobbleBoilText {
+  0%   { filter: url(#wobt-0); }
+  33%  { filter: url(#wobt-1); }
+  66%  { filter: url(#wobt-2); }
+}
+
+/* ---- typography ---- the uploaded font gently jitters everywhere ---- */
+.pixel, .hand {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.02em;
+  animation: wobbleBoilText var(--wobble-dur) steps(1) infinite;
+}
+
+/* ---- single-glyph icons: kill the trailing letter-spacing + leading so
+   the glyph optically centres inside its circle / frame ---- */
+.icon-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  letter-spacing: 0 !important;
+  text-indent: 0;
+}
+.icon-glyph svg { display: block; }
+
+/* taped corner effect for scrapbook cards */
+.tape {
+  position: absolute;
+  width: 74px; height: 26px;
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  opacity: 0.5;
+}
+
+/* scrollbars hidden everywhere (scroll still works) */
+::-webkit-scrollbar { width: 0; height: 0; display: none; }
+* { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* selection */
+::selection { background: var(--c-entertainment); color: var(--ink); }
+
+/* buttons reset */
+button { font-family: inherit; cursor: pointer; }
+
+/* ---- colour pickers: the chosen colour fills the whole swatch (no inner
+   rectangle gap). `.round` makes it a filled circle. ---- */
+input[type="color"].color-swatch {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+  border: none;
+  background: none;
+}
+input[type="color"].color-swatch::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"].color-swatch::-webkit-color-swatch { border: 2px solid var(--ink); border-radius: 6px; }
+input[type="color"].color-swatch::-moz-color-swatch { border: 2px solid var(--ink); border-radius: 6px; }
+input[type="color"].color-swatch.round::-webkit-color-swatch { border-radius: 50%; }
+input[type="color"].color-swatch.round::-moz-color-swatch { border-radius: 50%; }
+
+/* ---- hover affordance: clickable things get a soft ink outline ---- */
+.clickable {
+  outline: 2.5px solid transparent;
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-color 0.12s ease, background-color 0.12s ease;
+}
+.clickable:hover { outline-color: var(--ink); }
+
+/* clickable chart slices thicken + brighten on hover */
+.chart-slice { transition: stroke-width 0.1s ease, filter 0.1s ease; }
+.chart-slice:hover { stroke-width: 4; filter: brightness(1.05); }
+
+/* ---- editable text-box notes ---- */
+.note-box { font-family: var(--font-pixel); color: var(--ink); }
+.note-box:empty:before { content: attr(data-ph); opacity: 0.4; pointer-events: none; }
+
+/* utility */
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+/* ---- mobile: full-width, single column, no horizontal scroll ----------
+   The board only appears >=1160px; below that the widgets already stack
+   top-down. On phones we (a) stop the old "zoom shrink" (done in app.jsx so
+   content uses real width) and (b) keep anything from spilling past the
+   viewport edge. Charts/images are capped to 100% width so they scale down
+   to fit instead of forcing the page wider. */
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }            /* never scroll sideways */
+  img, svg { max-width: 100%; }                 /* charts/stickers fit the column */
+}
+
