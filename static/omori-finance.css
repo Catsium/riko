@@ -1,9 +1,5 @@
-/* ===========================================================
-   OMORI FINANCE TRACKER — core stylesheet
-   black & white scrapbook · soft-OMORI pastels · wobbly lines
-   =========================================================== */
+/* stylesheet */
 
-/* ---- the one uploaded font, used for EVERYTHING ---- */
 @font-face {
   font-family: 'OMORI Pixel';
   src: url('fonts/OMORI_GAME2.ttf') format('truetype');
