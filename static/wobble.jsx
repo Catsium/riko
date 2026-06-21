@@ -1,12 +1,7 @@
-/* ===========================================================
-   wobble.jsx — OMORI boiling hand-drawn linework
-   Exports (window): WobbleDefs, WobbleFrame, WobbleLine, WobbleHr
-   =========================================================== */
+/* I like the wobbly art style from omori */
 const { useRef, useState, useLayoutEffect } = React;
 
-/* Global filter defs. `scale` = frame jitter strength (px of displacement),
-   `textScale` = subtle title jitter. Three seed variants per target produce
-   the 3-frame "boil" that the CSS steps() animation cycles through. */
+/* Change wobbl strength*/
 function WobbleDefs({ scale = 2.6, textScale = 1.1 }) {
   const seeds = [7, 23, 51];
   const mk = (idPrefix, sc, freq) =>
@@ -26,8 +21,7 @@ function WobbleDefs({ scale = 2.6, textScale = 1.1 }) {
   );
 }
 
-/* A boiling rectangular frame. Draws the border as an SVG (which jitters),
-   while children sit crisply on top. */
+/* frame */
 function WobbleFrame({
   children, fill = 'transparent', stroke = '#161616', strokeWidth = 2.5,
   radius = 2, pad = 7, dashed = false, double = false, animate = true,
