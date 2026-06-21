@@ -1,9 +1,4 @@
-/* ===========================================================
-   modals.jsx — reusable sortable detail popup
-   Used by: Friends-who-owe-me (per friend) and Over-time (per day/period)
-   Same scrapbook style as AddEntryModal. Exports (window): DetailModal
-   items: [{ key, color, title, sub, date, amount, sign, paid }]
-   =========================================================== */
+/* ill make this more clear cut eventually after exams ig or if i get annoyed at it too much*/
 const MF = window.Finance;
 const { useState: useStateM } = React;
 
