@@ -3,11 +3,7 @@
    Plain JS (no Babel). Exposes window.Finance.
    =========================================================== */
 (function () {
-  // ---- categories (order matters for charts/legend) ----
-  // Every category is now fully editable (label + colour) and removable — incl.
-  // the built-in defaults — EXCEPT 'others', which is the fallback any orphaned
-  // entries get reassigned to, so it must always exist. The whole list (not just
-  // custom additions) is persisted so edits to defaults roam too.
+  // ---- categories order matters for charts/legend ----
   const DEFAULT_CATEGORIES = [
     { id: 'food',          label: 'Food',          color: '#f8c8d8' },
     { id: 'transport',     label: 'Transport',     color: '#bcd9f0' },
