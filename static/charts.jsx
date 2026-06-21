@@ -1,8 +1,4 @@
-/* ===========================================================
-   charts.jsx — hand-drawn SVG charts (no chart lib)
-   Exports (window): DonutChart, SpendLineChart, CategoryBars, InOutBars
-   All read pre-filtered entries. Pastel fills + boiling black outlines.
-   =========================================================== */
+/* charts */
 const F = window.Finance;
 
 /* ---- shared helpers ---- */
